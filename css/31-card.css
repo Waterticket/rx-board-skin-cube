@@ -1,0 +1,251 @@
+/*
+	cube — 카드 그리드. 그림자·라운드·배경색 없이 1px 실선만으로 구획한다.
+	grid-template-columns 는 반드시 minmax(0, 1fr) 로 잡는다 — 그냥 1fr 이면 트랙의 min-width가
+	auto(내용 기준)로 계산되어, 줄바꿈 없는 긴 텍스트가 있으면 트랙이 1fr 폭을 넘어 옆 칸을 침범한다
+	(오른쪽 칸의 스크랩 아이콘이 가려지는 원인). .cube-card 에도 min-width:0 을 맞춰 둔다.
+*/
+
+.cube-list {
+	display: grid;
+	grid-template-columns: minmax(0, 1fr);
+}
+
+.cube-card {
+	display: flex;
+	flex-direction: column;
+	position: relative;
+	min-width: 0;
+	border-bottom: 1px solid var(--cube-border);
+	padding-top: 20px;
+	padding-bottom: 20px;
+}
+
+.cube-card-top {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	margin-bottom: 6px;
+	min-height: 18px;
+}
+
+/*
+	관리자용 선택 체크박스. 배지 줄의 오른쪽 끝(=카드 오른쪽 위)에 붙인다.
+	체크박스 자체는 16px이지만 label에 여백을 줘 터치 목표를 넓히고, 그만큼 음수 마진으로
+	되돌려 카드의 다른 요소가 밀리지 않게 한다.
+*/
+.cube-card-check {
+	margin-left: auto;
+	display: inline-flex;
+	align-items: center;
+	padding: 6px;
+	margin-right: -6px;
+	margin-top: -6px;
+	margin-bottom: -6px;
+	border-radius: 4px;
+	cursor: pointer;
+}
+.cube-card-check:hover {
+	background: var(--cube-bg-hover);
+}
+.cube-card-check input {
+	width: 16px;
+	height: 16px;
+	margin: 0;
+	cursor: pointer;
+	accent-color: var(--cube-primary);
+}
+
+.cube-badge {
+	display: inline-flex;
+	align-items: center;
+	height: 18px;
+	padding: 0 6px;
+	border-radius: 3px;
+	font-size: 10px;
+	font-weight: 700;
+	letter-spacing: .02em;
+}
+.cube-badge.is-new {
+	background: var(--cube-badge-new-bg);
+	color: var(--cube-badge-new-fg);
+}
+.cube-badge.is-hot {
+	background: var(--cube-accent);
+	color: var(--cube-accent-contrast);
+}
+.cube-badge.is-notice {
+	background: transparent;
+	border: 1px solid var(--cube-border-strong);
+	color: var(--cube-text-muted);
+}
+
+.cube-card-main {
+	position: relative;
+	min-width: 0;
+}
+.cube-card.has-thumb .cube-card-main {
+	padding-right: calc(var(--cube-thumb) + 16px);
+	min-height: var(--cube-thumb);
+}
+
+.cube-card-title {
+	margin: 0;
+	font-size: 15px;
+	font-weight: 700;
+	line-height: 1.4;
+}
+.cube-card-title a {
+	display: -webkit-box;
+	-webkit-line-clamp: 2;
+	line-clamp: 2;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
+	overflow-wrap: anywhere;
+	word-break: break-word;
+}
+.cube-card-title a:hover {
+	text-decoration: underline;
+}
+.cube-lock {
+	display: inline-flex;
+	vertical-align: -2px;
+	margin-left: 4px;
+	color: var(--cube-text-faint);
+}
+.cube-lock svg {
+	width: 13px;
+	height: 13px;
+}
+
+.cube-card-summary {
+	margin: 6px 0 0;
+	font-size: 14px;
+	font-weight: 400;
+	color: var(--cube-text-muted);
+	line-height: 1.5;
+}
+.cube-card-summary a {
+	display: -webkit-box;
+	-webkit-line-clamp: 2;
+	line-clamp: 2;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
+	overflow-wrap: anywhere;
+	word-break: break-word;
+}
+
+.cube-card-thumb {
+	position: absolute;
+	right: 0;
+	top: 0;
+	width: var(--cube-thumb);
+	height: var(--cube-thumb);
+	background: var(--cube-bg-skeleton);
+	border-radius: 6px;
+	overflow: hidden;
+	flex-shrink: 0;
+}
+.cube-card-thumb img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+.cube-thumb-more {
+	position: absolute;
+	inset: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background: rgba(0, 0, 0, .45);
+	color: #fff;
+	font-style: normal;
+	font-weight: 700;
+	font-size: 14px;
+}
+
+.cube-card-foot {
+	margin-top: auto;
+	padding-top: 12px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	flex-wrap: wrap;
+	gap: 4px 12px;
+}
+
+.cube-card-author {
+	font-size: 12px;
+	color: var(--cube-text);
+	display: flex;
+	align-items: center;
+	gap: 4px;
+	min-width: 0;
+}
+.cube-author-label {
+	color: var(--cube-text-faint);
+	flex-shrink: 0;
+}
+.cube-author-label:hover {
+	color: var(--cube-text);
+	text-decoration: underline;
+}
+.cube-author-sep {
+	color: var(--cube-text-faint);
+}
+.cube-author-name {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.cube-card-meta {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	font-size: 12px;
+	color: var(--cube-text-faint);
+	flex-wrap: wrap;
+}
+.cube-meta-item {
+	display: inline-flex;
+	align-items: center;
+	gap: 3px;
+	white-space: nowrap;
+}
+.cube-meta-item svg {
+	width: 13px;
+	height: 13px;
+	flex-shrink: 0;
+}
+
+.cube-card-foot-right {
+	margin-left: auto;
+	flex-shrink: 0;
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	font-size: 12px;
+	color: var(--cube-text-faint);
+}
+.cube-meta-time {
+	white-space: nowrap;
+}
+.cube-scrap {
+	display: inline-flex;
+	flex-shrink: 0;
+	color: var(--cube-text-faint);
+	padding: 4px;
+	margin: -4px;
+	border-radius: 4px;
+}
+.cube-scrap svg {
+	width: 15px;
+	height: 15px;
+}
+.cube-scrap:hover {
+	color: var(--cube-text);
+	background: var(--cube-bg-hover);
+}
+.cube-scrap[aria-pressed="true"] {
+	color: var(--cube-accent);
+}

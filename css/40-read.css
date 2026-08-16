@@ -1,0 +1,313 @@
+/* cube — 글 상세 */
+
+/* 목록과 폭을 통일한다(--cube-max) — 사이드바가 없으므로 좁힐 이유가 없고, 페이지 간 통일감이 더 중요하다. */
+.cube-read-wrap {
+	max-width: var(--cube-max);
+	margin: 0 auto;
+	padding-top: 20px;
+}
+
+.cube-breadcrumb {
+	font-size: 13px;
+	color: var(--cube-text-muted);
+	display: flex;
+	align-items: center;
+	gap: 6px;
+	margin-bottom: 10px;
+}
+.cube-breadcrumb a:hover {
+	text-decoration: underline;
+}
+
+.cube-read-title {
+	font-size: 20px;
+	font-weight: 800;
+	line-height: 1.4;
+	margin: 0 0 14px;
+	display: flex;
+	align-items: baseline;
+	gap: 8px;
+	flex-wrap: wrap;
+}
+
+.cube-read-byline {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	margin-bottom: 8px;
+}
+.cube-avatar {
+	width: 28px;
+	height: 28px;
+	border-radius: 50%;
+	object-fit: cover;
+	background: var(--cube-bg-skeleton);
+}
+.cube-avatar-fallback {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	color: var(--cube-text-faint);
+}
+.cube-avatar-fallback svg {
+	width: 16px;
+	height: 16px;
+}
+.cube-read-author {
+	font-size: 14px;
+	font-weight: 700;
+}
+
+.cube-read-info {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding-bottom: 16px;
+	border-bottom: 1px solid var(--cube-border);
+	font-size: 13px;
+	color: var(--cube-text-faint);
+}
+.cube-read-info-left {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+}
+.cube-read-info-left span {
+	display: inline-flex;
+	align-items: center;
+	gap: 3px;
+}
+.cube-read-info-left svg {
+	width: 13px;
+	height: 13px;
+}
+.cube-read-info-sep {
+	color: var(--cube-border-strong);
+}
+.cube-read-info-right {
+	display: flex;
+	align-items: center;
+	gap: 4px;
+}
+
+.cube-read-body {
+	padding-top: 24px;
+	padding-bottom: 24px;
+	font-size: 15px;
+	line-height: 1.6;
+	word-break: break-word;
+	overflow-wrap: anywhere;
+}
+.cube-read-body img,
+.cube-read-body video {
+	max-width: 100%;
+	height: auto;
+	border-radius: 6px;
+}
+.cube-read-body.is-secret {
+	color: var(--cube-text-faint);
+	text-align: center;
+	padding: 60px 0;
+}
+.cube-read-body a {
+	color: var(--cube-link);
+	text-decoration: underline;
+}
+
+/* 첨부파일: 접힌 <details> 박스. 열기 전에는 "첨부파일 N" 한 줄만 차지한다. */
+.cube-files {
+	margin: 0 0 16px;
+	background: var(--cube-bg-sub);
+	border-radius: 8px;
+	font-size: 13px;
+}
+.cube-files-summary {
+	display: flex;
+	align-items: center;
+	gap: 6px;
+	padding: 10px 14px;
+	min-height: 40px;
+	color: var(--cube-text-muted);
+	font-weight: 600;
+	cursor: pointer;
+	list-style: none;
+	border-radius: 8px;
+}
+/* 기본 삼각형 마커를 지운다 — 오른쪽 caret 으로 대신한다. */
+.cube-files-summary::-webkit-details-marker {
+	display: none;
+}
+.cube-files-summary:hover {
+	color: var(--cube-text);
+}
+.cube-files-summary svg {
+	width: 15px;
+	height: 15px;
+	flex-shrink: 0;
+}
+.cube-files-caret {
+	margin-left: auto;
+	display: inline-flex;
+	transition: transform .15s ease;
+}
+.cube-files[open] .cube-files-caret {
+	transform: rotate(180deg);
+}
+.cube-files[open] .cube-files-summary {
+	border-bottom: 1px solid var(--cube-border);
+	border-radius: 8px 8px 0 0;
+}
+
+.cube-files-list {
+	padding: 8px 14px 12px;
+}
+/*
+	flex 가 아니라 grid + minmax(0, 1fr) 이어야 한다.
+	라이믹스는 원본 파일명 대신 40자짜리 해시가 그대로 남는 경우가 있는데, 이건 줄바꿈이 안 되는
+	한 덩어리다. flex 로 두면 항목에 min-width:0 을 줘도 그 텍스트의 min-content 폭이 위로 전파되고,
+	레이아웃의 .main-content 가 grid 항목(min-width:auto)이라 트랙째 늘어나 페이지 전체가
+	화면 밖으로 밀린다(모바일 388px 화면에서 578px). minmax(0, ...) 트랙은 최소폭이 0 이라
+	그 전파를 여기서 끊는다 — 31-card.css 의 카드 그리드와 같은 이유다.
+*/
+.cube-file-item {
+	display: grid;
+	grid-template-columns: minmax(0, 1fr) auto;
+	align-items: center;
+	gap: 8px;
+	padding: 4px 0;
+}
+.cube-file-item a {
+	color: var(--cube-link);
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+.cube-file-size {
+	flex: 0 0 auto;
+	color: var(--cube-text-faint);
+}
+
+/* 목록 카드의 메타 아이콘과 같은 감각으로 — 테두리·배경 없는 플랫한 아이콘+숫자 (요청: 보더라인 없이) */
+.cube-read-actions {
+	display: flex;
+	align-items: center;
+	gap: 20px;
+	padding-top: 16px;
+	padding-bottom: 16px;
+	flex-wrap: wrap;
+}
+.cube-vote-btn,
+.cube-jump-comment {
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+	font-size: 14px;
+	font-weight: 600;
+	color: var(--cube-text-muted);
+	padding: 4px;
+	margin: -4px;
+	border-radius: 6px;
+}
+.cube-vote-btn svg,
+.cube-jump-comment svg {
+	width: 18px;
+	height: 18px;
+}
+.cube-vote-btn:hover,
+.cube-jump-comment:hover {
+	color: var(--cube-text);
+}
+.cube-vote-btn.is-active {
+	color: var(--cube-accent);
+}
+.cube-share {
+	margin-left: auto;
+	display: flex;
+	gap: 6px;
+}
+
+.cube-read-nav {
+	padding-top: 20px;
+	padding-bottom: 32px;
+	display: flex;
+	justify-content: center;
+}
+
+.cube-related {
+	padding-top: 24px;
+	padding-bottom: 8px;
+	border-top: 1px solid var(--cube-border);
+}
+.cube-related-title {
+	font-size: 14px;
+	font-weight: 800;
+	margin: 0 0 8px;
+	color: var(--cube-text-muted);
+}
+.cube-related-list {
+	display: flex;
+	flex-direction: column;
+}
+.cube-related-item {
+	display: flex;
+	align-items: baseline;
+	gap: 8px;
+	padding: 10px 0;
+	border-bottom: 1px solid var(--cube-border);
+}
+.cube-related-item a {
+	flex: 1 1 auto;
+	min-width: 0;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	font-size: 14px;
+}
+.cube-related-item a:hover {
+	text-decoration: underline;
+}
+.cube-related-cmt {
+	flex-shrink: 0;
+	font-size: 12px;
+	color: var(--cube-text-faint);
+}
+
+/* ⋯ 더보기 메뉴 — 네이티브 <details> 로 구현해 별도 JS 상태관리 없이 접근성을 확보한다 */
+.cube-dropdown {
+	position: relative;
+}
+.cube-dropdown-trigger {
+	list-style: none;
+	cursor: pointer;
+}
+.cube-dropdown-trigger::-webkit-details-marker {
+	display: none;
+}
+.cube-dropdown-menu {
+	position: absolute;
+	right: 0;
+	top: calc(100% + 4px);
+	min-width: 140px;
+	background: var(--cube-bg);
+	border: 1px solid var(--cube-border-strong);
+	border-radius: 8px;
+	box-shadow: 0 4px 16px rgba(0, 0, 0, .08);
+	padding: 6px;
+	z-index: 20;
+}
+.cube-dropdown-menu li + li {
+	margin-top: 2px;
+}
+.cube-dropdown-menu a,
+.cube-dropdown-menu button {
+	display: block;
+	width: 100%;
+	text-align: left;
+	padding: 8px 10px;
+	border-radius: 6px;
+	font-size: 13px;
+}
+.cube-dropdown-menu a:hover,
+.cube-dropdown-menu button:hover {
+	background: var(--cube-bg-hover);
+}

@@ -1,0 +1,10 @@
+@version(2)
+{{-- board.view.php:839 dispBoardCategory() -> setTemplateFile('category.html'). 확장자 하드코딩 때문에 .html + @version(2)로 만든다. |auto 필터는 쓰지 않는다. --}}
+@include('lib/boot')
+@load('css/00-tokens.css')
+@load('css/10-base.css')
+@load('css/30-list.css')
+@load('css/90-responsive.css')
+<div class="cube">
+	@include('list/categories')
+</div>

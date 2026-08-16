@@ -1,0 +1,167 @@
+/* cube — 글쓰기 · 댓글 폼 · 삭제/비밀번호 확인 · 태그 · 이력 */
+
+.cube-form-wrap {
+	padding: 24px 0 60px;
+	max-width: var(--cube-read-max);
+	margin: 0 auto;
+}
+.cube-form-title {
+	font-size: 20px;
+	font-weight: 800;
+	margin: 0 0 20px;
+}
+
+.cube-form-row {
+	margin-bottom: 14px;
+}
+.cube-form-row-split {
+	display: flex;
+	gap: 8px;
+}
+.cube-form-label {
+	display: block;
+	font-size: 13px;
+	font-weight: 700;
+	margin-bottom: 6px;
+	color: var(--cube-text-muted);
+}
+.cube-form-required {
+	color: var(--cube-accent);
+	margin-left: 2px;
+}
+.cube-form-input,
+.cube-form-select {
+	width: 100%;
+	padding: 10px 12px;
+	border: 1px solid var(--cube-border-strong);
+	border-radius: 8px;
+	background: var(--cube-bg);
+}
+.cube-form-title-input {
+	font-size: 17px;
+	font-weight: 700;
+}
+.cube-form-editor {
+	min-height: 320px;
+}
+.cube-form-options {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 6px 16px;
+	font-size: 13px;
+	color: var(--cube-text-muted);
+}
+.cube-form-options label {
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+}
+.cube-form-foot {
+	display: flex;
+	justify-content: flex-end;
+	gap: 8px;
+	margin-top: 20px;
+}
+
+.cube-confirm-wrap {
+	padding-top: 60px;
+}
+.cube-confirm {
+	max-width: 420px;
+	margin: 0 auto;
+	text-align: center;
+}
+.cube-confirm-title {
+	font-size: 18px;
+	font-weight: 800;
+	margin: 0 0 12px;
+}
+.cube-confirm-body {
+	color: var(--cube-text-muted);
+	font-size: 14px;
+	margin: 0 0 20px;
+	padding: 12px;
+	background: var(--cube-bg-sub);
+	border-radius: 8px;
+}
+.cube-confirm .cube-form-foot {
+	justify-content: center;
+}
+
+.cube-quote {
+	margin-bottom: 16px;
+	padding: 12px 14px;
+	background: var(--cube-bg-sub);
+	border-left: 3px solid var(--cube-border-strong);
+	border-radius: 4px;
+	font-size: 13px;
+}
+.cube-quote-author {
+	font-weight: 700;
+	display: block;
+	margin-bottom: 4px;
+}
+.cube-quote-body {
+	color: var(--cube-text-muted);
+}
+
+.cube-tag-cloud {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px;
+}
+.cube-tag-item {
+	padding: 6px 12px;
+	border-radius: 999px;
+	background: var(--cube-bg-sub);
+	font-size: 13px;
+	color: var(--cube-text-muted);
+}
+.cube-tag-item:hover {
+	background: var(--cube-bg-hover);
+	color: var(--cube-text);
+}
+
+.cube-vote-log {
+	padding: 20px;
+}
+.cube-vote-log-title {
+	font-size: 14px;
+	font-weight: 700;
+	margin: 16px 0 8px;
+}
+.cube-vote-log-list li {
+	padding: 4px 0;
+	font-size: 13px;
+	border-bottom: 1px solid var(--cube-border);
+}
+
+.cube-update-list {
+	border-top: 1px solid var(--cube-border);
+}
+.cube-update-list li {
+	padding: 12px 0;
+	border-bottom: 1px solid var(--cube-border);
+	display: flex;
+	justify-content: space-between;
+	gap: 12px;
+	font-size: 14px;
+}
+.cube-update-meta {
+	color: var(--cube-text-faint);
+	font-size: 12px;
+	white-space: nowrap;
+}
+.cube-update-reason {
+	color: var(--cube-text-muted);
+	font-size: 13px;
+	margin: 0 0 16px;
+}
+.cube-update-extra {
+	margin-top: 20px;
+	font-size: 13px;
+}
+.cube-update-extra dt {
+	font-weight: 700;
+	margin-top: 10px;
+}

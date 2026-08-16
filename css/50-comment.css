@@ -1,0 +1,172 @@
+/* cube — 댓글 */
+
+.cube-comments {
+	padding-top: 24px;
+	padding-bottom: 40px;
+	scroll-margin-top: 16px;
+}
+.cube-comments-head {
+	font-size: 16px;
+	font-weight: 800;
+	margin: 0 0 14px;
+}
+.cube-comments-head span {
+	color: var(--cube-accent);
+}
+
+/* 새 댓글 작성 폼 */
+.cube-comment-form {
+	margin-bottom: 24px;
+}
+.cube-comment-input {
+	width: 100%;
+	min-height: 64px;
+	padding: 12px 14px;
+	border: 1px solid var(--cube-border-strong);
+	border-radius: 8px;
+	resize: vertical;
+	background: var(--cube-bg);
+}
+.cube-comment-guest {
+	display: flex;
+	gap: 8px;
+	margin-top: 8px;
+}
+.cube-comment-guest-input {
+	flex: 1 1 0;
+	min-width: 0;
+	padding: 8px 10px;
+	border: 1px solid var(--cube-border-strong);
+	border-radius: 6px;
+	background: var(--cube-bg);
+}
+.cube-comment-form-foot {
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	gap: 12px;
+	margin-top: 8px;
+}
+.cube-comment-form-msg {
+	font-size: 13px;
+	color: var(--cube-text-faint);
+}
+.cube-comment-closed {
+	padding: 16px;
+	text-align: center;
+	background: var(--cube-bg-sub);
+	border-radius: 8px;
+	color: var(--cube-text-faint);
+	font-size: 14px;
+	margin-bottom: 24px;
+}
+.cube-comment-closed a {
+	color: var(--cube-link);
+	text-decoration: underline;
+}
+
+/* 목록 */
+.cube-comment-list > li {
+	border-bottom: 1px solid var(--cube-border);
+}
+.cube-comment-item {
+	padding: 16px 0;
+}
+
+/* 대댓글 그룹 — 개별 들여쓰기가 아니라 연속 구간을 하나의 회색 블록으로 묶는다 (01문서 §6.2) */
+.cube-reply-group {
+	background: var(--cube-bg-sub);
+	border-top: 1px solid var(--cube-border);
+	border-bottom: 1px solid var(--cube-border);
+	padding: 0 16px;
+}
+.cube-reply-group .cube-comment-item {
+	border-bottom: 1px solid var(--cube-border);
+}
+.cube-reply-group .cube-comment-item:last-child {
+	border-bottom: 0;
+}
+.cube-comment-item.depth-2 {
+	padding-left: 20px;
+}
+
+.cube-comment-head {
+	display: flex;
+	align-items: center;
+	gap: 6px;
+	margin-bottom: 4px;
+}
+.cube-comment-author {
+	font-size: 13px;
+	font-weight: 700;
+}
+.cube-comment-author-badge {
+	font-size: 10px;
+	font-weight: 700;
+	color: var(--cube-accent);
+	border: 1px solid var(--cube-accent);
+	border-radius: 3px;
+	padding: 1px 4px;
+}
+
+.cube-comment-body {
+	font-size: 15px;
+	line-height: 1.6;
+	word-break: break-word;
+	overflow-wrap: anywhere;
+}
+.cube-comment-deleted {
+	font-size: 14px;
+	color: var(--cube-text-faint);
+	padding: 8px 0;
+}
+
+.cube-comment-meta {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	margin-top: 8px;
+	font-size: 12px;
+	color: var(--cube-text-faint);
+}
+.cube-comment-vote,
+.cube-comment-reply-btn {
+	display: inline-flex;
+	align-items: center;
+	gap: 4px;
+}
+.cube-comment-vote svg,
+.cube-comment-reply-btn svg {
+	width: 13px;
+	height: 13px;
+}
+.cube-comment-vote.is-active {
+	color: var(--cube-accent);
+}
+.cube-comment-reply-btn[aria-expanded="true"] {
+	color: var(--cube-primary);
+}
+.cube-comment-dropdown {
+	margin-left: auto;
+}
+.cube-comment-dropdown .cube-dropdown-trigger {
+	display: inline-flex;
+	padding: 4px;
+}
+
+/* 인라인 답글 폼 — 새 페이지로 이동하지 않고 클릭한 댓글 바로 아래에 뜬다 */
+.cube-reply-form-slot:empty {
+	display: none;
+}
+.cube-reply-form-slot {
+	margin-top: 10px;
+}
+.cube-reply-form {
+	margin-bottom: 0;
+	padding: 12px;
+	background: var(--cube-bg-sub);
+	border-radius: 8px;
+}
+.cube-reply-form .cube-comment-input {
+	min-height: 48px;
+}

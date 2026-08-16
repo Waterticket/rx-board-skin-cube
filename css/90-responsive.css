@@ -1,0 +1,159 @@
+/*
+	cube — 반응형은 이 파일 한 곳에만 둔다.
+	01문서 §8 실측: 목록 열 전환의 진짜 기준은 1100px 하나뿐이다. 767 / 480은 타이포·터치 타깃 보정용으로 추가한다.
+	list_columns 스킨 옵션(auto/1/2)은 .cube[data-columns] 로 내려오며, 열 수는 여기서만 결정한다 — JS는 계산하지 않는다.
+*/
+
+/* ── 목록: 카드 그리드 ───────────────────────────────────────── */
+
+/*
+	2열은 column-gap으로 벌리지 않는다. gap을 주면 왼쪽 카드의 border-bottom이 gap 폭만큼 끊기고
+	가운데 border-right도 그 사이에 붕 떠서, 표가 아니라 떨어진 카드 두 장으로 보인다.
+	원본(01문서 §3.2 실측)은 트랙을 정확히 1/2씩 붙여놓고 좌열 padding-right / 우열 padding-left
+	20px로만 구분선 양옆을 비운다 — 그래서 가로줄이 목록 폭 전체를 끊김 없이 가로지른다.
+	여기서도 같은 방식을 쓴다: 트랙은 딱 붙이고, 여백은 카드 안쪽 padding으로만 만든다.
+*/
+@media (min-width: 768px) {
+	.cube[data-columns="2"] .cube-list {
+		grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+	}
+	.cube[data-columns="2"] .cube-card:nth-child(odd) {
+		padding-right: var(--cube-col-pad);
+		border-right: 1px solid var(--cube-border);
+	}
+	.cube[data-columns="2"] .cube-card:nth-child(even) {
+		padding-left: var(--cube-col-pad);
+	}
+}
+
+@media (min-width: 1100px) {
+	.cube-wrap {
+		max-width: var(--cube-max);
+		margin: 0 auto;
+	}
+
+	.cube[data-columns="auto"] .cube-list {
+		grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+	}
+	.cube[data-columns="auto"] .cube-card:nth-child(odd) {
+		padding-right: var(--cube-col-pad);
+		border-right: 1px solid var(--cube-border);
+	}
+	.cube[data-columns="auto"] .cube-card:nth-child(even) {
+		padding-left: var(--cube-col-pad);
+	}
+
+	.cube-card {
+		padding-top: 24px;
+		padding-bottom: 24px;
+	}
+	.cube-card-title {
+		font-size: 17px;
+	}
+
+	.cube-cat-tabs {
+		display: flex;
+	}
+	.cube-cat-select {
+		display: none;
+	}
+
+	/* ── 상세 · 댓글: 01문서 §5.2/§6.2 실측 타이포로 확대 ── */
+	.cube-read-title {
+		font-size: 24px;
+		line-height: 1.35;
+	}
+	.cube-read-body {
+		font-size: 16px;
+		line-height: 1.75;
+	}
+	.cube-comment-item {
+		padding: 19px 0;
+	}
+	.cube-reply-group {
+		padding-left: 24px;
+	}
+}
+
+@media (max-width: 1099.98px) {
+	.cube-cat-tabs {
+		display: none;
+	}
+	.cube-cat-select {
+		display: block;
+	}
+}
+
+/*
+	모바일 전체 폭 배출(full bleed).
+	레이아웃(layouts/root)의 .container는 좌우 padding을 갖는다 — 스킨은 레이아웃을 고칠 수 없으므로
+	그만큼 음수 마진으로 되밀어 화면 끝까지 나간 뒤, 글자 줄만 --cube-gutter로 다시 들여쓴다.
+	결과: 카드 구분선과 눌림 영역은 좌우 끝까지, 제목·요약은 페이지의 다른 요소와 같은 기준선.
+
+	음수 마진 값은 1.4rem/1.1rem — .container의 padding과 같은 rem 값이라 레이아웃이 root 폰트
+	크기를 바꿔도 같이 따라간다. 다만 min(..., 50vw - 50%)로 한 번 더 잠근다: 50vw - 50%가 곧
+	부모의 실제 좌우 padding이므로, 다른 레이아웃에 이 스킨을 붙여 그쪽 여백이 더 좁더라도
+	화면 밖으로 삐져나가 가로 스크롤이 생기지 않는다.
+*/
+@media (max-width: 767.98px) {
+	.cube {
+		--cube-gutter: 1.4rem;
+		margin-left: calc(-1 * min(var(--cube-gutter), max(0px, 50vw - 50%)));
+		margin-right: calc(-1 * min(var(--cube-gutter), max(0px, 50vw - 50%)));
+	}
+
+	/* 목록만 거터를 반납해 좌우 끝까지 쓰고, 대신 카드가 자기 안여백으로 글자를 들여쓴다. */
+	.cube-list {
+		padding-left: 0;
+		padding-right: 0;
+	}
+	.cube-card {
+		padding-left: var(--cube-gutter);
+		padding-right: var(--cube-gutter);
+	}
+
+	.cube-toolbar {
+		flex-wrap: wrap;
+	}
+	.cube-search {
+		flex-wrap: wrap;
+	}
+	.cube-search-input {
+		flex-basis: 100%;
+		order: 3;
+	}
+}
+
+@media (max-width: 480px) {
+	.cube {
+		--cube-gutter: 1.1rem;
+		--cube-thumb: 64px;
+	}
+	.cube-meta-view {
+		display: none;
+	}
+
+	/* 스티커 선택기: 390px 폭에서도 격자가 3열은 들어가도록 팩 목록과 셀을 줄인다. */
+	.cube-sticker-main {
+		height: 260px;
+	}
+	.cube-sticker-packs {
+		flex-basis: 56px;
+	}
+	.cube-sticker-pack {
+		width: 44px;
+		height: 44px;
+	}
+	.cube-sticker-pack img,
+	.cube-sticker-pack video {
+		width: 36px;
+		height: 36px;
+	}
+	.cube-sticker-page {
+		width: 44px;
+	}
+	.cube-sticker-item {
+		width: 76px;
+		height: 76px;
+	}
+}

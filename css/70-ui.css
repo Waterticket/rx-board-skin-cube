@@ -1,0 +1,31 @@
+/* cube — 전역 UI 조각: 맨 위로 버튼 등 (배지·페이지네이션은 30/31, 드롭다운은 40에 있다) */
+
+.cube-top-btn {
+	position: fixed;
+	right: 20px;
+	bottom: 20px;
+	width: 44px;
+	height: 44px;
+	border-radius: 50%;
+	background: var(--cube-bg);
+	border: 1px solid var(--cube-border-strong);
+	box-shadow: 0 2px 10px rgba(0, 0, 0, .12);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: var(--cube-text-muted);
+	z-index: 30;
+}
+.cube-top-btn:hover {
+	color: var(--cube-text);
+}
+.cube-top-btn svg {
+	width: 18px;
+	height: 18px;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+	html:has(.cube) {
+		scroll-behavior: smooth;
+	}
+}

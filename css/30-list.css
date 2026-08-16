@@ -1,0 +1,98 @@
+/* cube — 카테고리 탭 · 페이지네이션 */
+
+.cube-cats {
+	margin: 4px 0 4px;
+}
+/* 좌우 끝을 흐리게 하는 mask-image 는 쓰지 않는다 — 스크롤이 없어도 항상 걸려서 첫/마지막 탭(주로 '전체')이 반쯤 지워져 보인다. */
+.cube-cat-tabs {
+	display: flex;
+	gap: 4px;
+	overflow-x: auto;
+	scroll-snap-type: x proximity;
+	scrollbar-width: none;
+	padding: 4px 0;
+}
+.cube-cat-tabs::-webkit-scrollbar {
+	display: none;
+}
+.cube-cat-tab {
+	flex: 0 0 auto;
+	scroll-snap-align: start;
+	padding: 7px 14px;
+	border-radius: 999px;
+	font-size: 13px;
+	font-weight: 600;
+	color: var(--cube-text-muted);
+	background: var(--cube-bg-sub);
+	white-space: nowrap;
+}
+.cube-cat-tab:hover {
+	background: var(--cube-bg-hover);
+}
+.cube-cat-tab.is-active {
+	background: var(--cube-text);
+	color: var(--cube-bg);
+}
+
+.cube-cat-select {
+	display: none;
+	width: 100%;
+	padding: 10px 12px;
+	border-radius: 8px;
+	border: 1px solid var(--cube-border-strong);
+	background: var(--cube-bg);
+}
+
+.cube-pager-wrap {
+	margin: 24px 0;
+}
+.cube-pagination {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 2px;
+	flex-wrap: wrap;
+}
+.cube-page-link {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	min-width: 44px;
+	min-height: 44px;
+	padding: 0 8px;
+	border-radius: 6px;
+	font-size: 14px;
+	color: var(--cube-text-muted);
+}
+.cube-page-link:hover {
+	background: var(--cube-bg-hover);
+}
+.cube-page-link.is-active {
+	background: var(--cube-text);
+	color: var(--cube-bg);
+	font-weight: 700;
+}
+.cube-page-link svg {
+	width: 16px;
+	height: 16px;
+}
+
+.cube-loadmore-btn {
+	display: block;
+	width: 100%;
+	max-width: 320px;
+	margin: 24px auto;
+	padding: 12px;
+	text-align: center;
+	border-radius: 8px;
+	border: 1px solid var(--cube-border-strong);
+	font-weight: 600;
+	min-height: 44px;
+}
+.cube-loadmore-btn:hover {
+	background: var(--cube-bg-hover);
+}
+
+.cube-sentinel {
+	height: 1px;
+}

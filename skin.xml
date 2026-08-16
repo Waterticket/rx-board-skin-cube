@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<skin version="0.2">
+	<title xml:lang="ko">Cube</title>
+	<title xml:lang="en">Cube</title>
+	<description xml:lang="ko">2열 카드 피드형 반응형 게시판 스킨.</description>
+	<version>1.0.0</version>
+	<date>2026-08-16</date>
+	<author email_address="waterticket@potatosoft.kr" link="https://potatosoft.kr">
+		<name xml:lang="ko">Waterticket</name>
+	</author>
+	<license>GPL v2</license>
+	<extra_vars>
+		<group>
+			<title xml:lang="ko">머리말</title>
+			<var name="show_board_title" type="radio" default="Y">
+				<title xml:lang="ko">게시판 제목 표시</title>
+				<options value="Y"><title xml:lang="ko">표시</title></options>
+				<options value="N"><title xml:lang="ko">숨김</title></options>
+			</var>
+			<var name="board_description" type="textarea">
+				<title xml:lang="ko">게시판 설명</title>
+				<description xml:lang="ko">제목 아래 한 줄 설명. 비워두면 표시하지 않습니다.</description>
+			</var>
+			<var name="show_search" type="radio" default="N">
+				<title xml:lang="ko">검색창 표시</title>
+				<description xml:lang="ko">목록 하단 검색창입니다. 기본은 숨김입니다.</description>
+				<options value="N"><title xml:lang="ko">숨김 (기본)</title></options>
+				<options value="Y"><title xml:lang="ko">표시</title></options>
+			</var>
+		</group>
+		<group>
+			<title xml:lang="ko">목록 · 레이아웃</title>
+			<var name="list_columns" type="select" default="auto">
+				<title xml:lang="ko">목록 열 수</title>
+				<description xml:lang="ko">auto는 1100px 이상에서 2열, 미만에서 1열로 자동 전환됩니다.</description>
+				<options value="auto"><title xml:lang="ko">자동 (1100px 기준)</title></options>
+				<options value="1"><title xml:lang="ko">항상 1열</title></options>
+				<options value="2"><title xml:lang="ko">768px부터 2열</title></options>
+			</var>
+			<var name="content_max_width" type="text" default="1100">
+				<title xml:lang="ko">콘텐츠 최대 폭(px)</title>
+			</var>
+			<var name="summary_length" type="text" default="200">
+				<title xml:lang="ko">요약 최대 글자 수</title>
+			</var>
+			<var name="thumbnail_size" type="text" default="80">
+				<title xml:lang="ko">썸네일 크기(px)</title>
+			</var>
+			<var name="relative_time_limit" type="text" default="24">
+				<title xml:lang="ko">상대 시간 표시 한계(시간)</title>
+				<description xml:lang="ko">이 시간을 넘으면 절대 날짜로 표시합니다.</description>
+			</var>
+			<var name="date_format_past" type="text" default="Y.m.d">
+				<title xml:lang="ko">과거 날짜 표시 형식</title>
+			</var>
+			<var name="show_scrap" type="radio" default="Y">
+				<title xml:lang="ko">스크랩 버튼 표시</title>
+				<options value="Y"><title xml:lang="ko">표시</title></options>
+				<options value="N"><title xml:lang="ko">숨김</title></options>
+			</var>
+			<var name="author_label" type="select" default="none">
+				<title xml:lang="ko">작성자 옆 라벨</title>
+				<description xml:lang="ko">닉네임 옆에 표시할 라벨입니다. 목록 설정에 관계없이 항상 조회 가능합니다.</description>
+				<options value="none"><title xml:lang="ko">표시 안 함</title></options>
+				<options value="category"><title xml:lang="ko">카테고리명</title></options>
+				<options value="board"><title xml:lang="ko">게시판명</title></options>
+			</var>
+		</group>
+		<group>
+			<title xml:lang="ko">배지</title>
+			<var name="display_new" type="radio" default="Y">
+				<title xml:lang="ko">NEW 배지</title>
+				<options value="Y"><title xml:lang="ko">사용</title></options>
+				<options value="N"><title xml:lang="ko">사용 안 함</title></options>
+			</var>
+			<var name="duration_new" type="text" default="12">
+				<title xml:lang="ko">NEW 기준 시간</title>
+			</var>
+			<var name="display_hot" type="radio" default="Y">
+				<title xml:lang="ko">HOT 배지</title>
+				<options value="Y"><title xml:lang="ko">사용</title></options>
+				<options value="N"><title xml:lang="ko">사용 안 함</title></options>
+			</var>
+			<var name="hot_votes" type="text" default="10">
+				<title xml:lang="ko">HOT 기준 추천수</title>
+			</var>
+			<var name="hot_comments" type="text" default="20">
+				<title xml:lang="ko">HOT 기준 댓글수</title>
+			</var>
+		</group>
+		<group>
+			<title xml:lang="ko">페이징</title>
+			<var name="paging_mode" type="select" default="infinite">
+				<title xml:lang="ko">다음 글 불러오기 방식</title>
+				<options value="paging"><title xml:lang="ko">페이지네이션만</title></options>
+				<options value="more"><title xml:lang="ko">더 보기 버튼</title></options>
+				<options value="infinite"><title xml:lang="ko">무한 스크롤</title></options>
+			</var>
+		</group>
+		<group>
+			<title xml:lang="ko">상세 · 댓글</title>
+			<!-- 본문 폭은 목록 · 레이아웃 그룹의 콘텐츠 최대 폭을 그대로 쓴다 (목록과 상세 폭을 통일). -->
+			<var name="show_vote_box" type="radio" default="Y">
+				<title xml:lang="ko">추천 버튼 표시</title>
+				<options value="Y"><title xml:lang="ko">표시</title></options>
+				<options value="N"><title xml:lang="ko">숨김</title></options>
+			</var>
+			<var name="use_social_share" type="radio" default="N">
+				<title xml:lang="ko">SNS 공유 버튼</title>
+				<description xml:lang="ko">켜도 외부 SDK를 불러오지 않고 웹 공유 URL만 사용합니다.</description>
+				<options value="Y"><title xml:lang="ko">사용</title></options>
+				<options value="N"><title xml:lang="ko">사용 안 함</title></options>
+			</var>
+			<var name="show_top_button" type="radio" default="Y">
+				<title xml:lang="ko">맨 위로 버튼</title>
+				<options value="Y"><title xml:lang="ko">표시</title></options>
+				<options value="N"><title xml:lang="ko">숨김</title></options>
+			</var>
+			<var name="use_sticker" type="radio" default="Y">
+				<title xml:lang="ko">댓글 스티커</title>
+				<description xml:lang="ko">sticker 모듈이 설치되어 있고 모듈 설정에서 '사용'일 때만 실제로 표시됩니다.</description>
+				<options value="Y"><title xml:lang="ko">사용</title></options>
+				<options value="N"><title xml:lang="ko">사용 안 함</title></options>
+			</var>
+		</group>
+	</extra_vars>
+</skin>
