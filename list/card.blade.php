@@ -28,7 +28,6 @@
 	}
 
 	$cube_regTime = $document->getRegdateTime();
-	$cube_isRecent = (time() - $cube_regTime) < ($cube['relativeLimit'] * 3600);
 
 	// 글 주소는 목록의 문맥(sort_index·order_type·category·page·검색어)을 물려받지 않는다.
 	// getUrl 의 첫 인자를 '' 로 주면 현재 요청 인자를 전부 버리고 새로 만든다(Context.class.php:1784).
@@ -124,8 +123,8 @@
 		</div>
 
 		<div class="cube-card-foot-right">
-			<time class="cube-meta-time" datetime="{{ $document->getRegdateDT() }}">
-				{{ $cube_isRecent ? $document->getRegdate('H:i') : $document->getRegdate($cube['pastFormat']) }}
+			<time class="cube-meta-time" datetime="{{ $document->getRegdateDT() }}" title="{{ getDisplayDateTime($cube_regTime, 'Y-m-d H:i') }}">
+				{{ cube_timeago($cube_regTime, $cube) }}
 			</time>
 			@if($cube['showScrap'] && $is_logged)
 				<button type="button" class="cube-scrap" data-srl="{{ $document->document_srl }}" aria-label="스크랩" aria-pressed="false">{!! $cube_icons['bookmark'] !!}</button>

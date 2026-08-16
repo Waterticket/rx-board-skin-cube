@@ -46,9 +46,9 @@
 			<var name="thumbnail_size" type="text" default="80">
 				<title xml:lang="ko">썸네일 크기(px)</title>
 			</var>
-			<var name="relative_time_limit" type="text" default="24">
+			<var name="relative_time_limit" type="text" default="168">
 				<title xml:lang="ko">상대 시간 표시 한계(시간)</title>
-				<description xml:lang="ko">이 시간을 넘으면 절대 날짜로 표시합니다.</description>
+				<description xml:lang="ko">이 시간 안이면 '방금 / N분 전 / N시간 전 / N일 전'으로, 넘으면 아래 형식의 날짜로 표시합니다. 기본 168시간(7일). 목록·글 상세·댓글에 모두 적용됩니다.</description>
 			</var>
 			<var name="date_format_past" type="text" default="Y.m.d">
 				<title xml:lang="ko">과거 날짜 표시 형식</title>

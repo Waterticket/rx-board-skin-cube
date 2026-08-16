@@ -19,7 +19,7 @@
 		</div>
 		<div class="cube-comment-body">{!! $comment->getContent(false) !!}</div>
 		<div class="cube-comment-meta">
-			<time datetime="{{ $comment->getRegdateDT() }}">{{ $comment->getRegdate('Y.m.d H:i') }}</time>
+			<time datetime="{{ $comment->getRegdateDT() }}" title="{{ getDisplayDateTime($comment->getRegdateTime(), 'Y-m-d H:i') }}">{{ cube_timeago($comment->getRegdateTime(), $cube) }}</time>
 
 			@if($board_features->comment->vote_up ?? false)
 				<button type="button" class="cube-comment-vote{{ $cube_cVoted ? ' is-active' : '' }}" data-srl="{{ $comment->comment_srl }}" aria-pressed="{{ $cube_cVoted ? 'true' : 'false' }}" aria-label="댓글 추천">

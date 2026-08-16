@@ -1,7 +1,6 @@
 /*
 	cube.sticker.js — 댓글 스티커 선택기.
 
-	화면 구성은 arca.live 의 아카콘 선택기를 따른다: 제목줄(닫기) + 왼쪽 세로 팩 목록(70px) + 오른쪽 스티커 격자.
 	동작은 sticker 모듈 API 두 개로 끝난다 (modules/board/skins/sketchbook5/js/sticker.js 와 같은 흐름):
 	  sticker.getCommentStickerList {page}        -> {sticker:[{sticker_srl,title,main_image}]}   내가 가진 팩 목록(페이지 단위)
 	  sticker.getStickerElemList    {sticker_srl} -> {stickerImage:[{sticker_file_srl,name,url}]} 그 팩의 스티커들

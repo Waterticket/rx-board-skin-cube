@@ -35,7 +35,7 @@
 
 	<div class="cube-read-info">
 		<div class="cube-read-info-left">
-			<time datetime="{{ $oDocument->getRegdateDT() }}">{{ $oDocument->getRegdate('Y.m.d H:i') }}</time>
+			<time datetime="{{ $oDocument->getRegdateDT() }}" title="{{ getDisplayDateTime($oDocument->getRegdateTime(), 'Y-m-d H:i') }}">{{ cube_timeago($oDocument->getRegdateTime(), $cube) }}</time>
 			<span class="cube-read-info-sep" aria-hidden="true">·</span>
 			<span>{!! $cube_icons['eye'] !!}{{ number_format((int)$oDocument->get('readed_count')) }}</span>
 			<span class="cube-read-info-sep" aria-hidden="true">·</span>

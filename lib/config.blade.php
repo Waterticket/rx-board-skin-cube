@@ -8,7 +8,7 @@
 		'maxWidth'         => (int)($module_info->content_max_width ?? 0) ?: 1100,
 		'summaryLength'    => (int)($module_info->summary_length ?? 0) ?: 200,
 		'thumbSize'        => (int)($module_info->thumbnail_size ?? 0) ?: 80,
-		'relativeLimit'    => (int)($module_info->relative_time_limit ?? 0) ?: 24,
+		'relativeLimit'    => (int)($module_info->relative_time_limit ?? 0) ?: 168,
 		'pastFormat'       => trim((string)($module_info->date_format_past ?? '')) ?: 'Y.m.d',
 		'showScrap'        => ($module_info->show_scrap ?? 'Y') !== 'N',
 		'authorLabel'      => in_array(($module_info->author_label ?? ''), ['category', 'board'], true) ? $module_info->author_label : 'none',
@@ -33,6 +33,23 @@
 	if ($cube['useSticker']) {
 		$cube_stickerConfig = ModuleModel::getInstance()->getModuleConfig('sticker');
 		$cube['useSticker'] = is_object($cube_stickerConfig) && ($cube_stickerConfig->use ?? 'N') === 'Y';
+	}
+
+	/*
+		목록·상세·댓글이 함께 쓰는 시간 표기.
+		기준 시간 안이면 "방금 / N초 전 / N분 전 / N시간 전 / N일 전", 넘으면 날짜로 떨어뜨린다.
+	*/
+	if (!function_exists('cube_timeago')) {
+		function cube_timeago($timestamp, $config)
+		{
+			$timestamp = (int)$timestamp;
+			if (!$timestamp) {
+				return '';
+			}
+			return (RX_TIME - $timestamp) < (($config['relativeLimit'] ?? 168) * 3600)
+				? Rhymix\Framework\DateTime::getRelativeTimestamp($timestamp)
+				: getDisplayDateTime($timestamp, $config['pastFormat'] ?? 'Y.m.d');
+		}
 	}
 
 	// 스티커 선택기 하단 링크. getUrl의 첫 인자를 ''로 주면 현재 요청 인자(document_srl·page 등)를
